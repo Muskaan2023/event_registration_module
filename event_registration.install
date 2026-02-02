@@ -1,0 +1,150 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for event_registration module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function event_registration_schema() {
+  $schema = [];
+
+  // Event configuration table
+  $schema['event_config'] = [
+    'description' => 'Stores event configuration details.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary key: Unique ID.',
+      ],
+      'event_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Event name.',
+      ],
+      'event_category' => [
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => TRUE,
+        'description' => 'Event category.',
+      ],
+      'registration_start_date' => [
+        'type' => 'date',
+        'not null' => TRUE,
+        'description' => 'Registration start date.',
+      ],
+      'registration_end_date' => [
+        'type' => 'date',
+        'not null' => TRUE,
+        'description' => 'Registration end date.',
+      ],
+      'event_date' => [
+        'type' => 'date',
+        'not null' => TRUE,
+        'description' => 'Event date.',
+      ],
+      'created' => [
+        'type' => 'timestamp',
+        'not null' => TRUE,
+        'default' => CURRENT_TIMESTAMP,
+        'description' => 'The time that the event was created.',
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  // Event registration table
+  $schema['event_registration'] = [
+    'description' => 'Stores event registration details.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary key: Unique ID.',
+      ],
+      'full_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Full name of the registrant.',
+      ],
+      'email' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Email address of the registrant.',
+      ],
+      'college_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'College/University name.',
+      ],
+      'department' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Department of study.',
+      ],
+      'event_category' => [
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => TRUE,
+        'description' => 'Event category.',
+      ],
+      'event_date' => [
+        'type' => 'date',
+        'not null' => TRUE,
+        'description' => 'Event date.',
+      ],
+      'event_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Event name.',
+      ],
+      'event_config_id' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'description' => 'Foreign key to event_config table.',
+      ],
+      'created' => [
+        'type' => 'timestamp',
+        'not null' => TRUE,
+        'default' => CURRENT_TIMESTAMP,
+        'description' => 'The time that the registration was created.',
+      ],
+    ],
+    'primary key' => ['id'],
+    'unique keys' => [
+      'unique_email_event' => ['email', 'event_date'],
+    ],
+    'foreign keys' => [
+      'event_config' => [
+        'table' => 'event_config',
+        'columns' => ['event_config_id' => 'id'],
+      ],
+    ],
+  ];
+
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function event_registration_install() {
+  // Add permissions to administrator role
+  $role = \Drupal\user\Entity\Role::load('administrator');
+  if ($role) {
+    $role->grantPermission('administer event registration');
+    $role->grantPermission('view event registration list');
+    $role->grantPermission('access event registration form');
+    $role->save();
+  }
+}
