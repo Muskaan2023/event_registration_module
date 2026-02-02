@@ -1,0 +1,23 @@
+event_registration.admin:
+  title: 'Event Registration'
+  description: 'Event Registration administration'
+  parent: 'system.admin'
+  weight: 100
+
+event_registration.admin_config:
+  title: 'Settings'
+  description: 'Event Registration settings'
+  parent: 'event_registration.admin'
+  route_name: 'event_registration.admin_config'
+
+event_registration.config:
+  title: 'Event Configuration'
+  description: 'Configure events'
+  parent: 'event_registration.admin'
+  route_name: 'event_registration.config'
+
+event_registration.admin_list:
+  title: 'Registration List'
+  description: 'View event registrations'
+  parent: 'event_registration.admin'
+  route_name: 'event_registration.admin_list'

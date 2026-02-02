@@ -1,0 +1,11 @@
+'access event registration form':
+  title: 'Access Event Registration Form'
+  description: 'Allow users to access the event registration form.'
+
+'administer event registration':
+  title: 'Administer Event Registration'
+  description: 'Access to all Event Registration administrative pages.'
+
+'view event registration list':
+  title: 'View Event Registration List'
+  description: 'View the list of event registrations.'

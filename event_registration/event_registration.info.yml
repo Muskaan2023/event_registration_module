@@ -1,0 +1,7 @@
+name: 'Event Registration'
+type: module
+description: 'Custom module for event registration with email notifications'
+package: 'Custom'
+core_version_requirement: ^10
+dependencies:
+  - drupal:datetime
