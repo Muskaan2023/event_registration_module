@@ -1,0 +1,32 @@
+event_registration.admin_config:
+  path: '/admin/config/event-registration/settings'
+  defaults:
+    _form: '\Drupal\event_registration\Form\AdminConfigForm'
+    _title: 'Event Registration Settings'
+  requirements:
+    _permission: 'administer event registration'
+
+event_registration.config:
+  path: '/admin/config/event-registration/event'
+  defaults:
+    _form: '\Drupal\event_registration\Form\EventConfigForm'
+    _title: 'Event Configuration'
+  requirements:
+    _permission: 'administer event registration'
+
+event_registration.form:
+  path: '/event/registration'
+  defaults:
+    _form: '\Drupal\event_registration\Form\EventRegistrationForm'
+    _title: 'Event Registration'
+  requirements:
+    _permission: 'access event registration form'
+
+event_registration.admin_list:
+  path: '/admin/event-registration/list'
+  defaults:
+    _controller: '\Drupal\Core\Controller\StaticContentController::create'
+    _title: 'Event Registrations'
+    content: '<p>Registration list page will be here.</p>'
+  requirements:
+    _permission: 'view event registration list'
