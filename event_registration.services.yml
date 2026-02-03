@@ -1,0 +1,4 @@
+services:
+  event_registration.service:
+    class: Drupal\event_registration\EventRegistrationService
+    arguments: ['@database', '@config.factory', '@plugin.manager.mail']
